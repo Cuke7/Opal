@@ -38,7 +38,7 @@ import { store, db, setDemo } from "../store";
 import { ref as refdb, onValue } from "firebase/database";
 import { ref } from "vue";
 
-const notes = ref({});
+const notes = ref<any>({});
 
 //Set firebase listener
 const notesListRef = refdb(db, "notesList/");

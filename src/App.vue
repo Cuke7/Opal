@@ -49,12 +49,12 @@ const html = computed(() => {
     return "";
 });
 
-const editor = ref(null);
-const render = ref(null);
+const editor = ref<HTMLDivElement | null>(null);
+const render = ref<HTMLDivElement | null>(null);
 
 function toggle() {
-    editor.value.classList.toggle("hidden");
-    render.value.classList.toggle("hidden");
+    render.value?.classList.toggle("hidden");
+    editor.value?.classList.toggle("hidden");
     view.value = !view.value;
 }
 </script>

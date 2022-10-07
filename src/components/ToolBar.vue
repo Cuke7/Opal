@@ -5,8 +5,8 @@
             <PencilIcon v-if="props.view" class="w-6 h-6 text-pink-400" />
             <EyeIcon v-else class="w-6 h-6 text-pink-400" />
         </button>
-        <input v-if="!view" type="text" class="bg-transparent border-pink-400 border-2 rounded-lg px-2 font-mono text-lg" v-model="note.title" />
-        <div v-else class="font-mono text-lg">
+        <input v-if="!view" type="text" class="w-1/2 bg-transparent border-pink-400 border-2 rounded-lg px-2 font-mono text-lg" v-model="note.title" />
+        <div v-else class="font-mono text-lg w-1/2">
             {{ note.title }}
         </div>
         <label for="my-modal-6" class="p-0 btn modal-button btn-ghost hover:bg-blue-800 hover:bg-opacity-50" v-if="store.currentKey">
