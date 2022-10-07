@@ -17,9 +17,7 @@ module.exports = {
             h2: {
               color: theme("colors.blue.400"),
               "fontWeight": "400",
-              '@media (min-width: 1024px)': {
-                "margin-top": "0px!important",
-              }
+
             },
             h3: {
               color: theme("colors.blue.400"),
