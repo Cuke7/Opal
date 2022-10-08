@@ -39,7 +39,7 @@ import DrawerContent from "./components/DrawerContent.vue";
 import DeleteModal from "./components/DeleteModal.vue";
 import ToolBar from "./components/ToolBar.vue";
 
-const view = ref(true);
+const view = ref(false);
 
 const html = computed(() => {
     if (note.value.text) {
