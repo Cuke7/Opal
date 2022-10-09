@@ -23,6 +23,8 @@ export const note = ref({
     title: "Tutorial",
 })
 
+export const drawer = ref(false)
+
 
 onAuthStateChanged(auth, (user2: any) => {
     if (user2) {
@@ -76,6 +78,7 @@ export const store = reactive({
                     const retrievedNote = snapshot.val();
                     note.value = retrievedNote;
                     store.currentKey = key;
+                    drawer.value = false;
                 } else {
                     console.log("No data available");
                 }
@@ -142,6 +145,7 @@ export const setDemo = () => {
     note.value.text = demo;
     note.value.title = "Tutorial";
     store.currentKey = null;
+    drawer.value = false;
 };
 
 setDemo();

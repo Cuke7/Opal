@@ -1,6 +1,6 @@
 <template>
     <div class="drawer drawer-mobile">
-        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" v-model="drawer" />
         <div class="drawer-content">
             <div class="h-screen">
                 <!-- <div class="h-1/6 bg-gray-900 flex items-center justify-end">
@@ -9,12 +9,12 @@
                         <img src="./assets/stone.webp" class="w-auto h-full" alt="" />
                     </div>
                 </div> -->
-                <div class="flex h-full bg-gray-900 text-white p-2 sm:p-8">
-                    <div ref="editor" class="h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1">
+                <div class="flex h-full bg-gray-900 text-white p-2 px-4 sm:p-8">
+                    <div ref="editor" class="h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1 hidden">
                         <ToolBar @toggle="toggle" :view="view" />
                         <textarea v-model="note.text" class="flex-1 bg-transparent sm:bg-black w-full overflow-y-auto p-8 lg:text-lg bg-opacity-20"> </textarea>
                     </div>
-                    <div ref="render" class="sm:ml-8 h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1 hidden">
+                    <div ref="render" class="sm:ml-8 h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1">
                         <ToolBar @toggle="toggle" :view="view" />
                         <div class="flex-1 bg-transparent sm:bg-black overflow-y-auto prose max-w-none p-8 lg:prose-lg !prose-invert rounded-t-2xl bg-opacity-20" v-html="html" />
                     </div>
@@ -34,7 +34,7 @@
 import { computed, ref } from "vue";
 import { marked } from "marked";
 import Toast from "./components/Toast.vue";
-import { store, note } from "./store";
+import { store, note, drawer } from "./store";
 import DrawerContent from "./components/DrawerContent.vue";
 import DeleteModal from "./components/DeleteModal.vue";
 import ToolBar from "./components/ToolBar.vue";
