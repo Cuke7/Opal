@@ -11,11 +11,11 @@
                 </div> -->
                 <div class="flex h-full bg-gray-900 text-white p-2 px-4 sm:p-8">
                     <div ref="editor" class="h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1 hidden">
-                        <ToolBar @toggle="toggle" :view="view" />
-                        <textarea v-model="note.text" class="flex-1 bg-transparent sm:bg-black w-full overflow-y-auto p-8 lg:text-lg bg-opacity-20"> </textarea>
+                        <ToolBar @toggle="toggle" :view="view" :fixed-view="true" />
+                        <textarea @blur="store.saveNote" v-model="note.text" class="flex-1 bg-transparent sm:bg-black w-full overflow-y-auto px-8 py-4 lg:text-lg bg-opacity-20"> </textarea>
                     </div>
                     <div ref="render" class="sm:ml-8 h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1">
-                        <ToolBar @toggle="toggle" :view="view" />
+                        <ToolBar @toggle="toggle" :view="view" :fixed-view="false" />
                         <div class="flex-1 bg-transparent sm:bg-black overflow-y-auto prose max-w-none p-8 lg:prose-lg !prose-invert rounded-t-2xl bg-opacity-20" v-html="html" />
                     </div>
                 </div>

@@ -70,7 +70,7 @@ export const store = reactive({
         return update(refdb(db), updates);
     },
     loadNote: (key: string) => {
-        if (store.currentKey) store.saveNote();
+        // if (store.currentKey) store.saveNote();
         const dbRef = refdb(db);
         get(child(dbRef, `notesContent/${key}`))
             .then((snapshot) => {
