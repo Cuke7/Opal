@@ -16,7 +16,7 @@
                     </div>
                     <div ref="render" class="sm:ml-8 h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1">
                         <ToolBar @toggle="toggle" :view="view" :fixed-view="false" />
-                        <div class="flex-1 bg-transparent sm:bg-black overflow-y-auto prose max-w-none p-8 lg:prose-lg !prose-invert rounded-t-2xl bg-opacity-20" v-html="html" />
+                        <div ref="renderdiv" class="flex-1 bg-transparent sm:bg-black overflow-y-auto prose max-w-none p-8 lg:prose-lg !prose-invert rounded-t-2xl bg-opacity-20" v-html="html" />
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { marked } from "marked";
 import Toast from "./components/Toast.vue";
 import { store, note, drawer } from "./store";
@@ -57,4 +57,15 @@ function toggle() {
     editor.value?.classList.toggle("hidden");
     view.value = !view.value;
 }
+//Autoscroll
+const renderdiv = ref<HTMLDivElement | null>(null);
+watch(
+    note,
+    () => {
+        renderdiv.value?.scrollIntoView({ behavior: "smooth" });
+    },
+    {
+        flush: "post",
+    }
+);
 </script>

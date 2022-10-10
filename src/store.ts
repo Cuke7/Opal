@@ -88,6 +88,7 @@ export const store = reactive({
             });
     },
     saveNote: () => {
+        if (!store.currentKey) return
         const updates: any = {};
         updates["/notesContent/" + store.currentKey] = note.value;
         updates["/notesList/" + store.currentKey] = { title: note.value.title };
