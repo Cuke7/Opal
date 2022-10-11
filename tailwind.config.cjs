@@ -13,33 +13,45 @@ module.exports = {
             h1: {
               color: theme("colors.blue.400"),
               "fontWeight": "500",
+              "margin": "15px 0px 15px 0px!important",
             },
             h2: {
               color: theme("colors.blue.400"),
               "fontWeight": "400",
-
+              "margin": "5px 0px 5px 0px!important",
             },
             h3: {
               color: theme("colors.blue.400"),
               "fontWeight": "400",
+              "margin": "5px 0px 5px 0px!important",
+            },
+            h4: {
+              color: theme("colors.blue.400"),
+              "fontWeight": "400",
+              "margin": "5px 0px 5px 0px!important",
             },
             strong: {
               color: theme("colors.pink.500")
             },
             li: {
+              "margin": "0px 0px 0px 0px!important",
               '&::marker': {
                 color: theme("colors.green.400")
               },
             },
             hr: {
-              margin: "25px 0px 25px 0px",
+              margin: "15px 0px 15px 0px!important",
               borderColor: theme("colors.green.400"),
-              '@media (min-width: 1024px)': {
-                "margin": "25px 0px 25px 0px!important",
-              }
             },
             blockquote: {
+              "margin": "15px 0px 15px 0px!important",
               borderLeftColor: theme("colors.green.400")
+            },
+            p: {
+              "margin": "0px 0px 5px 0px!important",
+            },
+            ul: {
+              "margin": "5px 0px 0px 0px!important",
             }
           },
         },
