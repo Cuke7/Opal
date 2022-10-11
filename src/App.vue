@@ -16,7 +16,7 @@
                     </div>
                     <div ref="render" class="sm:ml-8 h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1">
                         <ToolBar @toggle="toggle" :view="view" class="sm:hidden" />
-                        <div class="flex-1 bg-transparent overflow-y-auto prose max-w-none p-8 lg:prose-lg !prose-invert bg-opacity-20 rounded-t-2xl" v-html="html" />
+                        <div class="flex-1 bg-transparent overflow-y-auto prose max-w-none px-4 sm:pr-16 lg:prose-lg !prose-invert bg-opacity-20 rounded-t-2xl" v-html="html" />
                     </div>
                 </div>
             </div>

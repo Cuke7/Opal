@@ -6,11 +6,11 @@
                 <PencilIcon v-if="!props.view" class="w-6 h-6 text-blue-400" />
                 <EyeIcon v-else class="w-6 h-6 text-blue-400" />
             </button>
-            <input v-if="props.view" type="text" class="sm:hidden w-full mx-2 bg-transparent border-pink-400 border-2 rounded-lg px-2 font-mono text-lg" v-model="note.title" />
+            <input @blur="store.saveNote" v-if="props.view" type="text" class="sm:hidden w-full mx-2 bg-transparent border-0 border-b-pink-400 border-b-2 px-2 font-mono text-lg" v-model="note.title" />
             <div v-else class="font-mono text-lg px-4 sm:hidden">
                 {{ note.title }}
             </div>
-            <input type="text" class="hidden sm:flex w-full m-2 bg-transparent border-pink-400 border-2 rounded-lg px-2 font-mono text-lg" v-model="note.title" v-if="store.currentKey" />
+            <input @blur="store.saveNote" type="text" class="hidden sm:flex w-full m-2 bg-transparent border-0 border-b-pink-400 border-b-2 font-mono text-lg" v-model="note.title" v-if="store.currentKey" />
             <div v-else class="hidden sm:flex font-mono text-lg px-4 m-2">
                 {{ note.title }}
             </div>
