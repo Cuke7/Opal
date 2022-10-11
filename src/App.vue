@@ -9,7 +9,7 @@
                         <img src="./assets/stone.webp" class="w-auto h-full" alt="" />
                     </div>
                 </div> -->
-                <div class="flex h-full bg-gray-900 text-white p-2 px-4 sm:p-8">
+                <div class="flex h-full bg-gray-900 text-white p-4 sm:p-8">
                     <div ref="editor" class="h-full sm:w-1/2 sm:flex flex-col w-full flex hidden">
                         <ToolBar @toggle="toggle" :view="view" class="lg:w-1/2"/>
                         <textarea @blur="store.saveNote" v-model="note.text" class="flex-1 bg-transparent w-full overflow-y-auto px-8 py-4 lg:text-lg bg-opacity-20"> </textarea>

@@ -24,6 +24,7 @@ export const note = ref({
 })
 
 export const drawer = ref(false)
+export const notes = ref<any>({});
 
 
 onAuthStateChanged(auth, (user2: any) => {
@@ -31,6 +32,12 @@ onAuthStateChanged(auth, (user2: any) => {
         console.log("onAuthStateChanged", user2);
         store.user = user2;
         store.toast("Logged in!", 2000);
+        //Set firebase listener
+        const notesListRef = refdb(db, `notesList/${store.user.uid}/`);
+        onValue(notesListRef, (snapshot) => {
+            const data = snapshot.val();
+            notes.value = data;
+        });
     } else {
         store.user = null;
         console.log("Logged out!", user2);
@@ -51,6 +58,7 @@ export const store = reactive({
         signOut(auth)
             .then(() => {
                 console.log("Logged out");
+                notes.value = {}
             })
             .catch((error: any) => console.error(error));
     },
@@ -60,19 +68,19 @@ export const store = reactive({
     },
     currentKey: <null | string>"",
     createNewNote: () => {
-        const newNoteKey = push(child(refdb(db), "notes")).key;
+        const newNoteKey = push(child(refdb(db), "/")).key;
         note.value.text = "# Hi mom";
         note.value.title = "My new note";
         store.currentKey = newNoteKey;
         const updates: any = {};
-        updates["/notesContent/" + newNoteKey] = note.value;
-        updates["/notesList/" + store.currentKey] = { title: note.value.title };
+        updates[`/notesContent/${store.user.uid}/${newNoteKey}`] = note.value;
+        updates[`/notesList/${store.user.uid}/${newNoteKey}`] = { title: note.value.title };
         return update(refdb(db), updates);
     },
     loadNote: (key: string) => {
         // if (store.currentKey) store.saveNote();
         const dbRef = refdb(db);
-        get(child(dbRef, `notesContent/${key}`))
+        get(child(dbRef, `notesContent/${store.user.uid}/${key}`))
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     const retrievedNote = snapshot.val();
@@ -90,8 +98,8 @@ export const store = reactive({
     saveNote: () => {
         if (!store.currentKey) return
         const updates: any = {};
-        updates["/notesContent/" + store.currentKey] = note.value;
-        updates["/notesList/" + store.currentKey] = { title: note.value.title };
+        updates[`/notesContent/${store.user.uid}/${store.currentKey}`] = note.value;
+        updates[`/notesList/${store.user.uid}/${store.currentKey}`] = { title: note.value.title };
         update(refdb(db), updates)
             .then(() => {
                 store.toast("Note saved", 1000);
@@ -109,8 +117,8 @@ export const store = reactive({
     },
     deleteNote: () => {
         const updates: any = {};
-        updates["/notesContent/" + store.currentKey] = null;
-        updates["/notesList/" + store.currentKey] = null;
+        updates[`/notesContent/${store.user.uid}/${store.currentKey}`] = null;
+        updates[`/notesList/${store.user.uid}/${store.currentKey}`] = null;
         update(refdb(db), updates)
             .then(() => {
                 store.toast("Note deleted", 1000);
