@@ -24,7 +24,7 @@
                     <DocumentArrowUpIcon class="h-6 w-6 text-pink-400" />
                     <div class="ml-4">Save note</div>
                 </button>
-                <!-- <button class="flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg">
+                <!-- <button class="flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg" @click="store.shareNote">
                     <ShareIcon class="h-6 w-6 text-pink-400" />
                     <div class="ml-4">Share note</div>
                 </button> -->

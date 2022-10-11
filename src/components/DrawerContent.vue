@@ -7,7 +7,7 @@
             <ArrowLeftOnRectangleIcon class="h-6 w-6 text-blue-400 mr-4" />
             Log in
         </button>
-        <!-- <button  class="ml-2 btn bg-opacity-20 bg-pink-400 hover:bg-blue-800 hover:bg-opacity-50" >Sign in</button> -->
+
         <div class="rounded-lg px-3" v-else>
             <div class="flex items-center h-12">
                 <img :src="store.user.photoURL" alt="" class="w-12 h-12 rounded-lg" />
@@ -16,8 +16,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <button v-if="store.user" @click="store.logout" class="mt-4 font-bold h-12 bg-pink-400 bg-opacity-20 hover:bg-opacity-50 rounded-lg w-full flex items-center justify-center hover:bg-blue-800">Log Out</button> -->
 
         <button class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2" v-if="store.user" @click="store.logout">
             <ArrowRightOnRectangleIcon class="h-6 w-6 text-blue-400 mr-4" />
@@ -28,7 +26,7 @@
             <InformationCircleIcon class="h-6 w-6 text-blue-400 mr-4" />
             Tutorial
         </button>
-        <hr class="my-2 mb-3 border-blue-400" v-if="store.user" />
+        <hr class="m-3 mt-2 border-blue-400" v-if="store.user" />
         <div v-if="store.user" class="text-lg ml-3 font-bold">My notes</div>
 
         <div v-if="notes">

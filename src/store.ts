@@ -78,7 +78,6 @@ export const store = reactive({
         return update(refdb(db), updates);
     },
     loadNote: (key: string) => {
-        // if (store.currentKey) store.saveNote();
         const dbRef = refdb(db);
         get(child(dbRef, `notesContent/${store.user.uid}/${key}`))
             .then((snapshot) => {
@@ -127,6 +126,9 @@ export const store = reactive({
             .catch(() => {
                 store.toast("Error, can't delete note", 5000);
             });
+    },
+    shareNote: () => {
+        console.log(`#${store.user.uid}/${store.currentKey}`)
     }
 })
 
