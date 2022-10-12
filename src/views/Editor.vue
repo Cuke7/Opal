@@ -10,23 +10,63 @@ import { watch } from "vue";
 const route = useRoute();
 const router = useRouter();
 
-const tuto = `# Hello first title
-## Hello second title
-### Hello third title
-...
+const tuto = `# Title 1
+## Title 2
+### Title 3
+#### Title 4
 
+There's a nice horizontal line:
 ***
 
-I can be *italic*, **bold** and even ***both***.
-> I'm a quote.
+Text can be *italic*, **bold**, even ***both*** or ~~striked~~.
 
-And there's a list:
+> You can also write quotes.
 
-- one,
-- ~~two~~,
+Writing links is easy, here's one: [bird pictures](https://louiscassany.carrd.co/).
+
+And there's some lists:
+- one
+- two
   - use 2 spaces for
   - a nested list,
-- tree.
+1. one again
+2. two again
+3. ...
+
+If you got a link, showing images is easy:
+![](https://louiscassany.carrd.co/assets/images/gallery01/0ae078f9_original.jpg?v=88049563)
+
+When writing lists, spaces and newlines are important. Writing this:
+\`\`\`
+***
+- first
+-second
+A new line.
+***
+\`\`\`
+will produce the following outcome:
+***
+- first
+-second
+A new line.
+***
+What you want to write is this:
+\`\`\` 
+***
+- first
+- second
+
+A new line.
+***
+\`\`\`
+
+In order to procuce this:
+***
+- first
+- second
+
+A new line.
+***
 `;
 
 note.value = {

@@ -51,7 +51,19 @@ module.exports = {
               "margin": "0px 0px 5px 0px!important",
             },
             ul: {
-              "margin": "5px 0px 0px 0px!important",
+              "margin": "5px 0px 15px 0px!important",
+            },
+            ol: {
+              "margin": "5px 0px 15px 0px!important",
+            },
+            pre: {
+              "margin": "10px 0px 1px 0px!important",
+            },
+            a: {
+              color: theme("colors.pink.400")
+            },
+            img: {
+              "margin": "10px 0px 10px 0px!important",
             }
           },
         },

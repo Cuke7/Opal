@@ -11,7 +11,7 @@
         <div class="rounded-lg px-3" v-else>
             <div class="flex items-center h-12">
                 <img :src="user.photoURL" alt="" class="w-12 h-12 rounded-lg" />
-                <div class="font-mono font-bold text-stone-200 mx-auto">
+                <div class="font-mono font-bold text-stone-200 ml-4">
                     {{ user.displayName }}
                 </div>
             </div>
