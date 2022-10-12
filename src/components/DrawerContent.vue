@@ -39,7 +39,7 @@
             </router-link>
         </div>
 
-        <button v-if="user" @click="createNote" class="btn btn-ghost w-full flex items-center justify-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2">
+        <button v-if="user" @click="createNote" class="btn btn-ghost w-full flex items-center justify-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg">
             <PlusIcon class="h-6 w-6 text-pink-400" />
         </button>
     </ul>
