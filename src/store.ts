@@ -3,6 +3,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signO
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref as refdb, push, child, update, onValue, get } from "firebase/database";
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyAlipydLd_XjBNk9ikNG3tfc_q4NW0j8FQ",
     authDomain: "opal-a0759.firebaseapp.com",
@@ -20,37 +21,38 @@ export const db = getDatabase(app);
 
 export const note = ref({
     text: "",
-    title: "Tutorial",
+    title: "",
+    key: <null | string>null
 })
 
 export const drawer = ref(false)
-export const notes = ref<any>({});
+export const notesDrawer = ref<any>({});
+export const user = ref<any>(null)
 
 
 onAuthStateChanged(auth, (user2: any) => {
     if (user2) {
         console.log("onAuthStateChanged", user2);
-        store.user = user2;
+        user.value = user2;
         store.toast("Logged in!", 2000);
         //Set firebase listener
-        const notesListRef = refdb(db, `notesList/${store.user.uid}/`);
+        const notesListRef = refdb(db, `notesList/${user.value.uid}/`);
         onValue(notesListRef, (snapshot) => {
             const data = snapshot.val();
-            notes.value = data;
+            notesDrawer.value = data;
         });
     } else {
-        store.user = null;
+        user.value = null;
         console.log("Logged out!", user2);
         store.toast("Logged out!", 2000);
     }
 });
 
 export const store = reactive({
-    user: <any>null,
     login: () => {
         signInWithPopup(auth, provider)
             .then((result: any) => {
-                store.user = result.user;
+                user.value = result.user;
             })
             .catch((error: any) => console.error(error));
     },
@@ -58,7 +60,7 @@ export const store = reactive({
         signOut(auth)
             .then(() => {
                 console.log("Logged out");
-                notes.value = {}
+                notesDrawer.value = {}
             })
             .catch((error: any) => console.error(error));
     },
@@ -66,25 +68,27 @@ export const store = reactive({
         show: false,
         text: "",
     },
-    currentKey: <null | string>"",
     createNewNote: () => {
-        const newNoteKey = push(child(refdb(db), "/")).key;
-        note.value.text = "# Hi mom";
-        note.value.title = "My new note";
-        store.currentKey = newNoteKey;
+        const newNoteKey = <string>push(child(refdb(db), "/")).key;
+        const newNote = {
+            text: "# Hi mom",
+            title: "My new note",
+            key: newNoteKey
+        }
+        store.tempKey = newNoteKey
         const updates: any = {};
-        updates[`/notesContent/${store.user.uid}/${newNoteKey}`] = note.value;
-        updates[`/notesList/${store.user.uid}/${newNoteKey}`] = { title: note.value.title };
+        updates[`/notesContent/${user.value.uid}/${newNoteKey}`] = { text: newNote.text, title: newNote.title };
+        updates[`/notesList/${user.value.uid}/${newNoteKey}`] = { title: newNote.title };
         return update(refdb(db), updates);
     },
-    loadNote: (key: string) => {
+    loadNote: (uid: string, key: string) => {
         const dbRef = refdb(db);
-        get(child(dbRef, `notesContent/${store.user.uid}/${key}`))
+        get(child(dbRef, `notesContent/${uid}/${key}`))
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     const retrievedNote = snapshot.val();
                     note.value = retrievedNote;
-                    store.currentKey = key;
+                    note.value.key = key;
                     drawer.value = false;
                 } else {
                     console.log("No data available");
@@ -95,10 +99,10 @@ export const store = reactive({
             });
     },
     saveNote: () => {
-        if (!store.currentKey) return
+        if (!note.value.key) return
         const updates: any = {};
-        updates[`/notesContent/${store.user.uid}/${store.currentKey}`] = note.value;
-        updates[`/notesList/${store.user.uid}/${store.currentKey}`] = { title: note.value.title };
+        updates[`/notesContent/${user.value.uid}/${note.value.key}`] = { text: note.value.text, title: note.value.title };
+        updates[`/notesList/${user.value.uid}/${note.value.key}`] = { title: note.value.title };
         update(refdb(db), updates)
             .then(() => {
                 store.toast("Note saved", 1000);
@@ -116,47 +120,9 @@ export const store = reactive({
     },
     deleteNote: () => {
         const updates: any = {};
-        updates[`/notesContent/${store.user.uid}/${store.currentKey}`] = null;
-        updates[`/notesList/${store.user.uid}/${store.currentKey}`] = null;
-        update(refdb(db), updates)
-            .then(() => {
-                store.toast("Note deleted", 1000);
-                setDemo()
-            })
-            .catch(() => {
-                store.toast("Error, can't delete note", 5000);
-            });
+        updates[`/notesContent/${user.value.uid}/${note.value.key}`] = null;
+        updates[`/notesList/${user.value.uid}/${note.value.key}`] = null;
+        return update(refdb(db), updates)
     },
-    shareNote: () => {
-        console.log(`#${store.user.uid}/${store.currentKey}`)
-    }
+    tempKey: ""
 })
-
-
-const demo = `# Hello first title
-## Hello second title
-### Hello third title
-...
-
-***
-
-I can be *italic*, **bold** and even ***both***.
-> I'm a quote.
-
-And there's a list:
-
-- one,
-- ~~two~~,
-  - use 2 spaces for
-  - a nested list,
-- tree.
-`;
-
-export const setDemo = () => {
-    note.value.text = demo;
-    note.value.title = "Tutorial";
-    store.currentKey = null;
-    drawer.value = false;
-};
-
-setDemo();

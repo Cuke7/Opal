@@ -1,5 +1,5 @@
 <template>
-    <div class="p-2 bg-black rounded-3xl flex bg-opacity-30 justify-between">
+    <div class="p-2 bg-blue-400 bg-opacity-10 rounded-3xl flex justify-between">
         <div class="flex items-center">
             <label for="my-drawer-2" class="btn btn-ghost drawer-button lg:hidden"> <Bars3Icon class="w-6 h-6 text-pink-400" /></label>
             <button @click="$emit('toggle')" class="btn btn-ghost lg:hidden">
@@ -10,12 +10,9 @@
             <div v-else class="font-mono text-lg px-4 sm:hidden">
                 {{ note.title }}
             </div>
-            <input @blur="store.saveNote" type="text" class="hidden sm:flex w-full m-2 bg-transparent border-0 border-b-pink-400 border-b-2 font-mono text-lg" v-model="note.title" v-if="store.currentKey" />
-            <div v-else class="hidden sm:flex font-mono text-lg px-4 m-2">
-                {{ note.title }}
-            </div>
+            <input @blur="store.saveNote" type="text" class="hidden sm:flex w-full m-2 bg-transparent border-0 border-b-pink-400 border-b-2 font-mono text-lg" v-model="note.title" />
         </div>
-        <div class="dropdown dropdown-hover dropdown-end p-2" v-if="store.currentKey">
+        <div class="dropdown dropdown-hover dropdown-end p-2" v-if="note.key">
             <div class="flex items-center h-full">
                 <EllipsisVerticalIcon tabindex="0" class="w-7 h-7 text-pink-400" />
             </div>
@@ -40,5 +37,5 @@
 <script lang="ts" setup>
 import { store, note } from "../store";
 import { DocumentArrowUpIcon, TrashIcon, EyeIcon, Bars3Icon, PencilIcon, ShareIcon, EllipsisVerticalIcon } from "@heroicons/vue/24/outline";
-const props = defineProps(["view", "isRender"]);
+const props = defineProps(["view"]);
 </script>

@@ -1,48 +1,59 @@
 <template>
     <ul class="p-4 overflow-y-auto w-64 bg-gray-800 text-white text-lg font-mono">
-        <div class="font-mono font-bold text-4xl flex justify-center my-4">Opal</div>
-        <img src="../assets/opal.png" alt="Opal stone" class="mx-auto my-4" />
+        <!-- <div class="font-mono font-bold text-4xl flex justify-center my-4">Opal</div>
+        <img src="../assets/opal.png" alt="Opal stone" class="mx-auto my-4" /> -->
 
-        <button class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2" v-if="!store.user" @click="store.login">
+        <button class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2" v-if="!user" @click="store.login">
             <ArrowLeftOnRectangleIcon class="h-6 w-6 text-blue-400 mr-4" />
             Log in
         </button>
 
         <div class="rounded-lg px-3" v-else>
             <div class="flex items-center h-12">
-                <img :src="store.user.photoURL" alt="" class="w-12 h-12 rounded-lg" />
+                <img :src="user.photoURL" alt="" class="w-12 h-12 rounded-lg" />
                 <div class="font-mono font-bold text-stone-200 mx-auto">
-                    {{ store.user.displayName }}
+                    {{ user.displayName }}
                 </div>
             </div>
         </div>
-
-        <button class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2" v-if="store.user" @click="store.logout">
+        <hr class="m-3 mt-5 border-blue-400" v-if="user" />
+        <router-link to="/" class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2" @click="drawer = false">
+            <HomeIcon class="h-6 w-6 text-blue-400 mr-4" />
+            Home
+        </router-link>
+        <router-link to="/tutorial" class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2" @click="drawer = false">
+            <InformationCircleIcon class="h-6 w-6 text-blue-400 mr-4" />
+            Tutorial
+        </router-link>
+        <button class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2" v-if="user" @click="store.logout">
             <ArrowRightOnRectangleIcon class="h-6 w-6 text-blue-400 mr-4" />
             Log out
         </button>
+        <hr class="m-3 mt-2 border-blue-400" v-if="user" />
+        <div v-if="user" class="text-lg ml-3 font-bold">My notes</div>
 
-        <button class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2" @click="setDemo">
-            <InformationCircleIcon class="h-6 w-6 text-blue-400 mr-4" />
-            Tutorial
-        </button>
-        <hr class="m-3 mt-2 border-blue-400" v-if="store.user" />
-        <div v-if="store.user" class="text-lg ml-3 font-bold">My notes</div>
-
-        <div v-if="notes">
-            <button @click="store.loadNote(key)" v-for="key in Object.keys(notes)" :key="key" class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2">
+        <div v-if="notesDrawer">
+            <router-link :to="`${key}`" v-for="key in Object.keys(notesDrawer)" :key="key" class="flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2">
                 <ClipboardIcon class="h-6 w-6 text-pink-400 mr-4" />
-                {{ notes[key].title }}
-            </button>
+                {{ notesDrawer[key].title }}
+            </router-link>
         </div>
 
-        <button v-if="store.user" @click="store.createNewNote" class="btn btn-ghost w-full flex items-center justify-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2">
+        <button v-if="user" @click="createNote" class="btn btn-ghost w-full flex items-center justify-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2">
             <PlusIcon class="h-6 w-6 text-pink-400" />
         </button>
     </ul>
 </template>
 
 <script setup lang="ts">
-import { ClipboardIcon, PlusIcon, InformationCircleIcon, ArrowRightOnRectangleIcon, ArrowLeftOnRectangleIcon } from "@heroicons/vue/24/outline";
-import { store, notes, setDemo } from "../store";
+import { ClipboardIcon, PlusIcon, InformationCircleIcon, ArrowRightOnRectangleIcon, ArrowLeftOnRectangleIcon, HomeIcon } from "@heroicons/vue/24/outline";
+import { store, notesDrawer, user, drawer } from "../store";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const createNote = () => {
+    store.createNewNote().then(() => {
+        router.push(store.tempKey);
+    });
+};
 </script>
