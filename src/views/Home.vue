@@ -1,6 +1,6 @@
 <template>
-    <div class="h-full bg-gray-900 flex justify-start items-center flex-col text-white px-8 font-mono overflow-y-auto">
-        <div class="flex items-center w-full justify-evenly">
+    <div class="h-full bg-gray-900 flex justify-start items-center flex-col text-white px-8 font-mono overflow-y-auto sm:px-36">
+        <div class="flex items-center w-full justify-evenly my-8 sm:justify-center sm:space-x-12">
             <img src="../assets/opal.png" alt="" class="h-24" />
             <div class="text-pink-400 text-7xl my-8">Opal</div>
         </div>
@@ -20,7 +20,7 @@
             </button>
         </div>
 
-        <div v-if="notesDrawer" class="w-full flex flex-wrap mt-4 space-x-2">
+        <div v-if="notesDrawer" class="w-full flex flex-wrap mt-12 space-x-2 sm:px-36 sm:space-x-8">
             <router-link :to="`${key}`" v-for="key in Object.keys(notesDrawer)" :key="key" class="border-blue-400 border-2 flex items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg p-2">
                 <ClipboardIcon class="h-6 w-6 text-pink-400 mr-2" />
                 {{ notesDrawer[key].title }}
