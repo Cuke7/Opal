@@ -41,7 +41,7 @@ if (route.params.key == "tutorial") {
     note.value.key = null;
 } else {
     if (!user.value) {
-        router.push("/tutorial");
+        router.push("/");
     } else {
         store.loadNote(user.value.uid, route.params.key + "");
     }
