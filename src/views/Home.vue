@@ -26,7 +26,7 @@
                     {{ notesDrawer[key].title }}
                 </router-link>
             </div>
-            <button v-if="user" class="flex items-center border-blue-400 border-2 hover:border-pink-400 rounded-lg p-2 m-2">
+            <button v-if="user" class="flex items-center border-blue-400 border-2 hover:border-pink-400 rounded-lg p-2 m-2" @click="createNote">
                 <PlusIcon class="h-6 w-6 text-pink-400 mr-4" />
                 Add a new note
             </button>
@@ -37,4 +37,12 @@
 <script setup lang="ts">
 import { ArrowLeftOnRectangleIcon, InformationCircleIcon, ClipboardIcon, ArrowRightOnRectangleIcon, PlusIcon } from "@heroicons/vue/24/outline";
 import { user, store, notesDrawer } from "../store";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const createNote = () => {
+    store.createNewNote().then(() => {
+        router.push(store.tempKey);
+    });
+};
 </script>

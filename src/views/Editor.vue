@@ -10,20 +10,33 @@ import { watch } from "vue";
 const route = useRoute();
 const router = useRouter();
 
-const tuto = `# Title 1
-## Title 2
-### Title 3
-#### Title 4
+const tuto = `# Markdown tutorial
 
-There's a nice horizontal line:
-***
-
+## Text
 Text can be *italic*, **bold**, even ***both*** or ~~striked~~.
+\`\`\`
+Text can be *italic*, **bold**, even ***both*** or ~~striked~~.
+\`\`\`
 
+## Horizontal lines
+***
+\`\`\`
+***
+\`\`\`
+
+## Quotes
 > You can also write quotes.
+\`\`\`
+> You can also write quotes.
+\`\`\`
 
+## Links
 Writing links is easy, here's one: [bird pictures](https://louiscassany.carrd.co/).
+\`\`\`
+Writing links is easy, here's one: [bird pictures](https://louiscassany.carrd.co/).
+\`\`\`
 
+## Lists
 And there's some lists:
 - one
 - two
@@ -32,11 +45,27 @@ And there's some lists:
 1. one again
 2. two again
 3. ...
-
+\`\`\`
+And there's some lists:
+- one
+- two
+  - use 2 spaces for
+  - a nested list,
+1. one again
+2. two again
+3. ...
+\`\`\`
+## Images
 If you got a link, showing images is easy:
 ![](https://louiscassany.carrd.co/assets/images/gallery01/0ae078f9_original.jpg?v=88049563)
+\`\`\`
+If you got a link, showing images is easy:
+![](https://louiscassany.carrd.co/assets/images/gallery01/0ae078f9_original.jpg?v=88049563)
+\`\`\`
 
-When writing lists, spaces and newlines are important. Writing this:
+## Markdown common errors
+### About lists
+When writing lists, **spaces** and **linebreaks** are important. Writing this:
 \`\`\`
 ***
 - first
