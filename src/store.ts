@@ -124,5 +124,8 @@ export const store = reactive({
         updates[`/notesList/${user.value.uid}/${note.value.key}`] = null;
         return update(refdb(db), updates)
     },
-    tempKey: ""
+    tempKey: "",
+    shareNote() {
+        
+    }
 })

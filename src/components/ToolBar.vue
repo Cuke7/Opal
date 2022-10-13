@@ -19,15 +19,15 @@
             <ul tabindex="0" class="dropdown-content shadow rounded-box w-48 bg-black text-white space-y-3 flex flex-col py-4 px-4">
                 <button class="flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg" @click="store.saveNote()">
                     <DocumentArrowUpIcon class="h-6 w-6 text-pink-400" />
-                    <div class="ml-4">Save note</div>
+                    <div class="ml-4">Save</div>
                 </button>
-                <!-- <button class="flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg" @click="store.shareNote">
+                <button for="my-modal-4" class="modal-button flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg cursor-pointer" @click="copy">
                     <ShareIcon class="h-6 w-6 text-pink-400" />
-                    <div class="ml-4">Share note</div>
-                </button> -->
+                    <div class="ml-4">Share</div>
+                </button>
                 <label for="my-modal-6" class="modal-button flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg cursor-pointer">
                     <TrashIcon class="h-6 w-6 text-pink-400" />
-                    <div class="ml-4">Delete note</div>
+                    <div class="ml-4">Delete</div>
                 </label>
             </ul>
         </div>
@@ -35,7 +35,11 @@
 </template>
 
 <script lang="ts" setup>
-import { store, note } from "../store";
+import { store, note, user } from "../store";
 import { DocumentArrowUpIcon, TrashIcon, EyeIcon, Bars3Icon, PencilIcon, ShareIcon, EllipsisVerticalIcon } from "@heroicons/vue/24/outline";
 const props = defineProps(["view"]);
+const copy = () => {
+    navigator.clipboard.writeText("https://opal-app.netlify.app/" + user.value.uid + "/" + note.value.key);
+    store.toast("Link copied", 3000);
+};
 </script>

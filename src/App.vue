@@ -30,4 +30,5 @@ import Toast from "./components/Toast.vue";
 import { store, drawer } from "./store";
 import DrawerContent from "./components/DrawerContent.vue";
 import DeleteModal from "./components/DeleteModal.vue";
+
 </script>
