@@ -18,12 +18,12 @@ module.exports = {
             h2: {
               color: theme("colors.blue.400"),
               "fontWeight": "400",
-              "margin": "5px 0px 5px 0px!important",
+              "margin": "10px 0px 5px 0px!important",
             },
             h3: {
               color: theme("colors.blue.400"),
               "fontWeight": "400",
-              "margin": "5px 0px 5px 0px!important",
+              "margin": "8px 0px 5px 0px!important",
             },
             h4: {
               color: theme("colors.blue.400"),

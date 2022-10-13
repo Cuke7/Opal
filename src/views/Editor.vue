@@ -63,11 +63,13 @@ If you got a link, showing images is easy:
 ![](https://louiscassany.carrd.co/assets/images/gallery01/0ae078f9_original.jpg?v=88049563)
 \`\`\`
 
-## Markdown common errors
-### About lists
-When writing lists, **spaces** and **linebreaks** are important. Writing this:
+## Markdown pitfalls
+
+Markdown cares about **spaces** and **linebreaks**.
+For instance, writing this:
 \`\`\`
 ***
+###Title
 - first
 -second
 A new line.
@@ -75,6 +77,7 @@ A new line.
 \`\`\`
 will produce the following outcome:
 ***
+###Title
 - first
 -second
 A new line.
@@ -82,6 +85,7 @@ A new line.
 What you want to write is this:
 \`\`\` 
 ***
+### Title
 - first
 - second
 
@@ -91,6 +95,7 @@ A new line.
 
 In order to procuce this:
 ***
+### Title
 - first
 - second
 
@@ -106,7 +111,7 @@ note.value = {
 
 if (route.params.key == "tutorial") {
     note.value.text = tuto;
-    note.value.title = "Markdown tutorial";
+    note.value.title = "Tutorial";
     note.value.key = null;
 } else {
     if (!user.value) {

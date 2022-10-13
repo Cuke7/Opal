@@ -19,7 +19,7 @@ import { marked } from "marked";
 
 const html = computed(() => {
     if (note.value.text) {
-        let md = note.value.text;
+        let md = note.value.text
         return marked.parse(md);
     }
     return "";
