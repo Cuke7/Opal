@@ -29,6 +29,12 @@
             <ArrowRightOnRectangleIcon class="h-6 w-6 text-blue-400 mr-4" />
             Log out
         </button>
+        <div class="sm:flex w-full items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2 hidden">
+            <input type="checkbox" class="toggle bg-pink-400 mySwitch border-2 border-blue-400 mr-4" v-model="editMode" />
+            <span v-if="editMode">Edit mode</span>
+            <span v-else="editMode">View mode</span>
+        </div>
+
         <hr class="m-3 mt-2 border-blue-400" v-if="user" />
         <div v-if="user" class="text-lg ml-3 font-bold">My notes</div>
 
@@ -47,7 +53,7 @@
 
 <script setup lang="ts">
 import { ClipboardIcon, PlusIcon, InformationCircleIcon, ArrowRightOnRectangleIcon, ArrowLeftOnRectangleIcon, HomeIcon } from "@heroicons/vue/24/outline";
-import { store, notesDrawer, user, drawer } from "../store";
+import { store, notesDrawer, user, drawer, editMode } from "../store";
 import { useRouter } from "vue-router";
 const router = useRouter();
 

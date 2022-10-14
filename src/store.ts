@@ -28,6 +28,7 @@ export const note = ref({
 export const drawer = ref(false)
 export const notesDrawer = ref<any>({});
 export const user = ref<any>(null)
+export const editMode = ref(true)
 
 
 onAuthStateChanged(auth, (user2: any) => {
@@ -125,7 +126,4 @@ export const store = reactive({
         return update(refdb(db), updates)
     },
     tempKey: "",
-    shareNote() {
-        
-    }
 })
