@@ -21,10 +21,10 @@
                     <DocumentArrowUpIcon class="h-6 w-6 text-pink-400" />
                     <div class="ml-4">Save</div>
                 </button>
-                <button for="my-modal-4" class="modal-button flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg cursor-pointer" @click="copy">
+                <!-- <button for="my-modal-4" class="modal-button flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg cursor-pointer" @click="copy">
                     <ShareIcon class="h-6 w-6 text-pink-400" />
                     <div class="ml-4">Share</div>
-                </button>
+                </button> -->
                 <label for="my-modal-6" class="modal-button flex justify-start items-center hover:bg-blue-800 hover:bg-opacity-50 p-2 rounded-lg cursor-pointer">
                     <TrashIcon class="h-6 w-6 text-pink-400" />
                     <div class="ml-4">Delete</div>
