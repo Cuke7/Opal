@@ -1,6 +1,6 @@
 <template>
     <div class="p-2 bg-neutral rounded-3xl flex justify-between">
-        <div class="flex items-center pl-2">
+        <div class="flex items-center">
             <label for="my-drawer-2" class="btn btn-ghost drawer-button lg:hidden"> <Bars3Icon class="w-6 h-6 text-secondary" /></label>
             <button @click="$emit('toggle')" class="btn btn-ghost lg:hidden">
                 <PencilIcon v-if="!props.view" class="w-6 h-6 text-primary" />
