@@ -29,7 +29,7 @@
             <ArrowRightOnRectangleIcon class="h-6 w-6 text-primary mr-4" />
             Log out
         </button>
-        <div class="sm:flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2 hidden">
+        <div class="lg:flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2 hidden">
             <input type="checkbox" class="toggle bg-secondary mySwitch border-2 border-primary mr-4" v-model="editMode" />
             <span v-if="editMode">Edit mode</span>
             <span v-else="editMode">View mode</span>

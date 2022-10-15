@@ -1,7 +1,7 @@
 <template>
     <div class="flex h-full bg-base-100 text-base-content p-4 sm:px-8">
         <div ref="editor" class="h-full sm:w-1/2 sm:flex flex-col w-full flex hidden" v-if="editMode">
-            <ToolBar @toggle="toggle" :view="view" class="lg:w-1/2" />
+            <ToolBar @toggle="toggle" :view="view" class="" />
             <textarea @blur="store.saveNote" v-model="note.text" class="flex-1 bg-transparent w-full overflow-y-auto p-8 pt-4 lg:text-lg"> </textarea>
         </div>
         <div ref="render" class="sm:ml-8 h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1">

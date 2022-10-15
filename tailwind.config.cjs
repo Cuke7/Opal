@@ -27,12 +27,12 @@ module.exports = {
             h1: {
               color: theme("colors.primary"),
               "fontWeight": "500",
-              "margin": "15px 0px 15px 0px!important",
+              "margin": "0px 0px 30px 0px!important",
             },
             h2: {
               color: theme("colors.primary"),
               "fontWeight": "400",
-              "margin": "10px 0px 5px 0px!important",
+              "margin": "15px 0px 5px 0px!important",
             },
             h3: {
               color: theme("colors.primary"),
@@ -56,6 +56,7 @@ module.exports = {
             hr: {
               margin: "15px 0px 15px 0px!important",
               borderColor: theme("colors.accent"),
+              "max-width": "800px"
             },
             blockquote: {
               "margin": "15px 0px 15px 0px!important",
@@ -65,19 +66,21 @@ module.exports = {
               "margin": "0px 0px 5px 0px!important",
             },
             ul: {
-              "margin": "5px 0px 15px 0px!important",
+              "margin": "0px 0px 10px 0px!important",
             },
             ol: {
-              "margin": "5px 0px 15px 0px!important",
+              "margin": "0px 0px 10px 0px!important",
             },
             pre: {
-              "margin": "10px 0px 1px 0px!important",
+              "margin": "0px 0px 0px 0px!important",
+              "width": "fit-content"
             },
             a: {
               color: theme("colors.secondary")
             },
             img: {
-              "margin": "10px 0px 10px 0px!important",
+              "margin": "15px 0px 15px 0px!important",
+              "max-width": "500px"
             }
           },
         },
