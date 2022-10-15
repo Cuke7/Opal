@@ -1,5 +1,5 @@
 <template>
-    <div class="drawer drawer-mobile">
+    <div class="drawer drawer-mobile" data-theme="dark">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" v-model="drawer" />
         <div class="drawer-content">
             <div class="h-screen">
