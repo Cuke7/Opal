@@ -1,10 +1,10 @@
 <template>
     <div ref="themeSwitch" @click="dark = !dark" class="swap swap-rotate flex hover:bg-info p-2 rounded-lg hover:bg-opacity-50 justify-start" data-toggle-theme="dark,light" data-act-class="swap-active">
         <div class="swap">
-            <MoonIcon class="swap-off h-6 w-6 text-primary mr-4" />
-            <SunIcon class="swap-on h-6 w-6 text-primary mr-4" />
+            <MoonIcon class="swap-on h-6 w-6 text-primary mr-4" />
+            <SunIcon class="swap-off h-6 w-6 text-primary mr-4" />
         </div>
-        <div v-if="dark">Dark mode</div>
+        <div v-if="!dark">Dark mode</div>
         <div v-else>Light mode</div>
     </div>
 </template>

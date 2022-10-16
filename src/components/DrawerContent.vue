@@ -21,7 +21,7 @@
             Log out
         </button>
 
-        <hr class="m-3 mt-2 border-primary" v-if="user" />
+        <hr class="m-3 mt-2 border-t-2 border-accent" v-if="user" />
         <router-link to="/" class="flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2" @click="drawer = false">
             <HomeIcon class="h-6 w-6 text-primary mr-4" />
             Home
@@ -37,10 +37,10 @@
 
         <DarkModeSwitch />
 
-        <div class="lg:flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg mt-2 p-2 hidden">
+        <div class="lg:flex w-full items-center rounded-lg mt-2 p-2 hidden">
             <input type="checkbox" class="toggle bg-secondary mySwitch border-2 border-primary mr-4" v-model="viewOnly" />
-            <span v-if="viewOnly">View mode</span>
-            <span v-else>Edit mode</span>
+            <span v-if="viewOnly">View only</span>
+            <span v-else>Edit + View</span>
         </div>
 
         <!-- <div class="lg:flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2 hidden">
@@ -49,8 +49,8 @@
             <span v-else>Dark theme</span>
         </div> -->
 
-        <hr class="m-3 mt-2 border-primary" v-if="user" />
-        <div v-if="user" class="text-lg ml-3 font-bold">My notes</div>
+        <hr class="m-3 mt-2 border-accent border-t-2" v-if="user" />
+        <div v-if="user" class="text-xl ml-3 font-bold">My notes</div>
 
         <div v-if="notesDrawer">
             <router-link :to="`${key}`" v-for="key in Object.keys(notesDrawer)" :key="key" class="flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2">
@@ -59,7 +59,7 @@
             </router-link>
         </div>
 
-        <button v-if="user" @click="createNote" class="btn btn-ghost w-full flex items-center justify-center hover:bg-info hover:bg-opacity-50 rounded-lg">
+        <button v-if="user" @click="createNote" class="btn btn-ghost w-full hover:bg-info hover:bg-opacity-50 rounded-lg border-primary border-2">
             <PlusIcon class="h-6 w-6 text-primary" />
         </button>
     </ul>

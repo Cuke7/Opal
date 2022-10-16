@@ -20,8 +20,9 @@ module.exports = {
           "primary": "#2563eb",
           "secondary": "#c026d3",
           "accent": "#065f46",
-          "neutral": "#ddd6fe",
-          "base-100": "#f3f4f6",
+          "neutral": "#cbd5e1",
+          "base": "#e7e5e4",
+          "base-content": "black",
           "info": "#4f46e5",
           "neutral-content": "black"
         },
@@ -65,6 +66,7 @@ module.exports = {
             hr: {
               margin: "15px 0px 15px 0px!important",
               borderColor: theme("colors.accent"),
+              "border-top-width": "3px",
               "max-width": "800px"
             },
             blockquote: {
@@ -82,18 +84,18 @@ module.exports = {
             },
             pre: {
               "margin": "0px 0px 0px 0px!important",
-              '@media (min-width: 640px)': {
-                // "width": "fit-content"
-              }
+              // '@media (min-width: 2000px)': {
+              //   "width": "fit-content"
+              // }
             },
             a: {
               color: theme("colors.secondary")
             },
             img: {
               "margin": "15px 0px 15px 0px!important",
-              // "max-width": "500px"
-              '@media (min-width: 640px)': {
-                "max-width": "500px"
+              "max-width": "100%",
+              '@media (min-width: 2000px)': {
+                "max-width": "600px"
               }
             }
           },

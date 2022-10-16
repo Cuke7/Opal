@@ -17,7 +17,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: --p;
+    background: hsl(var(--s));
     border-radius: 10px;
 }
 
@@ -35,10 +35,10 @@ input {
     outline: none;
 }
 
-/* .mySwitch:checked {
-    box-shadow: var(--handleoffset) 0 0 2px rgb(31 41 55 / var(--tw-bg-opacity)) inset, 0 0 0 2px rgb(31 41 55 / var(--tw-bg-opacity)) inset;
+.mySwitch:checked {
+    box-shadow: var(--handleoffset) 0 0 2px hsl(var(--n)) inset, 0 0 0 2px hsl(var(--n)) inset;
 }
 
 .mySwitch {
-    box-shadow: calc(var(--handleoffset) * -1) 0 0 2px rgb(31 41 55 / var(--tw-bg-opacity)) inset, 0 0 0 2px rgb(31 41 55 / var(--tw-bg-opacity)) inset;
-} */
+    box-shadow: calc(var(--handleoffset) * -1) 0 0 2px hsl(var(--n)) inset, 0 0 0 2px hsl(var(--n)) inset;
+}

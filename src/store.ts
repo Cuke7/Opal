@@ -68,8 +68,8 @@ export const store = reactive({
             .catch((error: any) => console.error(error));
     },
     toastSettings: {
-        show: false,
-        text: "",
+        show: true,
+        text: "Logged in",
     },
     createNewNote: () => {
         const newNoteKey = <string>push(child(refdb(db), "/")).key;
