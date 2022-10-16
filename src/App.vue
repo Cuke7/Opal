@@ -1,5 +1,5 @@
 <template>
-    <div class="drawer drawer-mobile" data-theme="dark">
+    <div class="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" v-model="drawer" />
         <div class="drawer-content">
             <div class="h-screen">
@@ -30,5 +30,4 @@ import Toast from "./components/Toast.vue";
 import { store, drawer } from "./store";
 import DrawerContent from "./components/DrawerContent.vue";
 import DeleteModal from "./components/DeleteModal.vue";
-
 </script>

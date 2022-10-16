@@ -16,7 +16,7 @@
             <div class="flex items-center h-full">
                 <EllipsisVerticalIcon tabindex="0" class="w-7 h-7 text-secondary" />
             </div>
-            <ul tabindex="0" class="dropdown-content shadow rounded-box w-48 bg-base-300 text-white space-y-3 flex flex-col py-4 px-4">
+            <ul tabindex="0" class="dropdown-content shadow rounded-box w-48 bg-base-200 text-neutral-content space-y-3 flex flex-col py-4 px-4">
                 <button class="flex justify-start items-center hover:bg-info hover:bg-opacity-50 p-2 rounded-lg" @click="store.saveNote()">
                     <DocumentArrowUpIcon class="h-6 w-6 text-secondary" />
                     <div class="ml-4">Save</div>

@@ -28,7 +28,9 @@ export const note = ref({
 export const drawer = ref(false)
 export const notesDrawer = ref<any>({});
 export const user = ref<any>(null)
-export const editMode = ref(true)
+export const viewOnly = ref(false)
+export const lightMode = ref(false)
+
 
 
 onAuthStateChanged(auth, (user2: any) => {

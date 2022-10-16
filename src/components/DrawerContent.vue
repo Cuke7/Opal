@@ -8,15 +8,20 @@
             Log in
         </button>
 
-        <div class="rounded-lg px-3" v-else>
+        <div class="rounded-lg px-3 mt-4" v-else>
             <div class="flex items-center h-12">
                 <img :src="user.photoURL" alt="" class="w-12 h-12 rounded-lg" />
-                <div class="font-mono font-bold text-stone-200 ml-4">
+                <div class="font-mono font-bold text-neutral-content ml-4">
                     {{ user.displayName }}
                 </div>
             </div>
         </div>
-        <hr class="m-3 mt-5 border-primary" v-if="user" />
+        <button class="flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2" v-if="user" @click="store.logout">
+            <ArrowRightOnRectangleIcon class="h-6 w-6 text-primary mr-4" />
+            Log out
+        </button>
+
+        <hr class="m-3 mt-2 border-primary" v-if="user" />
         <router-link to="/" class="flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2" @click="drawer = false">
             <HomeIcon class="h-6 w-6 text-primary mr-4" />
             Home
@@ -29,11 +34,20 @@
             <ArrowRightOnRectangleIcon class="h-6 w-6 text-primary mr-4" />
             Log out
         </button>
-        <div class="lg:flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2 hidden">
-            <input type="checkbox" class="toggle bg-secondary mySwitch border-2 border-primary mr-4" v-model="editMode" />
-            <span v-if="editMode">Edit mode</span>
-            <span v-else="editMode">View mode</span>
+
+        <DarkModeSwitch />
+
+        <div class="lg:flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg mt-2 p-2 hidden">
+            <input type="checkbox" class="toggle bg-secondary mySwitch border-2 border-primary mr-4" v-model="viewOnly" />
+            <span v-if="viewOnly">View mode</span>
+            <span v-else>Edit mode</span>
         </div>
+
+        <!-- <div class="lg:flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2 hidden">
+            <input type="checkbox" class="toggle bg-secondary mySwitch border-2 border-primary mr-4" v-model="lightMode" />
+            <span v-if="lightMode">Light theme</span>
+            <span v-else>Dark theme</span>
+        </div> -->
 
         <hr class="m-3 mt-2 border-primary" v-if="user" />
         <div v-if="user" class="text-lg ml-3 font-bold">My notes</div>
@@ -53,8 +67,9 @@
 
 <script setup lang="ts">
 import { ClipboardIcon, PlusIcon, InformationCircleIcon, ArrowRightOnRectangleIcon, ArrowLeftOnRectangleIcon, HomeIcon } from "@heroicons/vue/24/outline";
-import { store, notesDrawer, user, drawer, editMode } from "../store";
+import { store, notesDrawer, user, drawer, viewOnly, lightMode } from "../store";
 import { useRouter } from "vue-router";
+import DarkModeSwitch from "./DarkModeSwitch.vue";
 const router = useRouter();
 
 const createNote = () => {

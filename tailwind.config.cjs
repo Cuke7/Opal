@@ -16,8 +16,17 @@ module.exports = {
           "info": "#1e40af",
           "neutral-content": "white"
         },
-      },
-    ],
+        light: {
+          "primary": "#be185d",
+          "secondary": "#0284c7",
+          "accent": "#065f46",
+          "neutral": "#ddd6fe",
+          "base-100": "#f3f4f6",
+          "info": "#4f46e5",
+          "neutral-content": "black"
+        },
+      }
+    ]
   },
   theme: {
     extend: {
