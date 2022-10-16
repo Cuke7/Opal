@@ -21,6 +21,10 @@ const dark = ref(true);
 
 onMounted(() => {
     themeChange(false);
-    dark.value = localStorage.theme == "dark";
+    if (localStorage.theme) {
+        dark.value = localStorage.theme == "dark";
+    } else {
+        dark.value = true;
+    }
 });
 </script>
