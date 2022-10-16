@@ -24,6 +24,7 @@ onMounted(() => {
     if (localStorage.theme) {
         dark.value = localStorage.theme == "dark";
     } else {
+        localStorage.theme = "dark";
         dark.value = true;
     }
 });
