@@ -12,6 +12,8 @@ const router = useRouter();
 
 const tuto = `# Markdown tutorial
 
+A quick introduction to markdown syntax.
+
 ## Text
 Text can be *italic*, **bold**, even ***both*** or ~~striked~~.
 \`\`\`

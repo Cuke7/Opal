@@ -73,14 +73,19 @@ module.exports = {
             },
             pre: {
               "margin": "0px 0px 0px 0px!important",
-              "width": "fit-content"
+              '@media (min-width: 640px)': {
+                // "width": "fit-content"
+              }
             },
             a: {
               color: theme("colors.secondary")
             },
             img: {
               "margin": "15px 0px 15px 0px!important",
-              "max-width": "500px"
+              // "max-width": "500px"
+              '@media (min-width: 640px)': {
+                "max-width": "500px"
+              }
             }
           },
         },
