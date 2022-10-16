@@ -22,10 +22,12 @@ const dark = ref(true);
 onMounted(() => {
     themeChange(false);
     if (localStorage.theme) {
-        dark.value = localStorage.theme == "dark";
-    } else {
-        localStorage.theme = "dark";
-        dark.value = true;
+        if (localStorage.theme == "dark") {
+            dark.value = true;
+            themeSwitch.value?.classList.toggle("swap-active");
+        } else {
+            dark.value = false;
+        }
     }
 });
 </script>

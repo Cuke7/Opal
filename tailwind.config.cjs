@@ -17,8 +17,8 @@ module.exports = {
           "neutral-content": "white"
         },
         light: {
-          "primary": "#be185d",
-          "secondary": "#0284c7",
+          "primary": "#2563eb",
+          "secondary": "#c026d3",
           "accent": "#065f46",
           "neutral": "#ddd6fe",
           "base-100": "#f3f4f6",
