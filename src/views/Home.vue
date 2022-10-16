@@ -21,7 +21,7 @@
                 </button>
             </div>
 
-            <div v-if="notesDrawer" class="w-full flex flex-wrap mt-8 justify-center lg:justify-start items-center">
+            <div v-if="notesDrawer" class="w-full flex flex-wrap mt-8 justify-start items-center">
                 <router-link :to="`${key}`" v-for="key in Object.keys(notesDrawer)" :key="key" class="border-primary border-2 flex items-center hover:border-secondary rounded-lg p-2 m-2">
                     <ClipboardIcon class="h-6 w-6 text-secondary mr-2" />
                     {{ notesDrawer[key].title }}
