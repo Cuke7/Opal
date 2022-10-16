@@ -1,10 +1,11 @@
 <template>
     <div class="h-full bg-base-100 flex justify-start items-center flex-col px-8 font-mono overflow-y-auto text-neutral-content">
         <div class="w-full lg:w-1/2">
-            <div class="flex items-center lg:justify-start justify-around my-8 lg:space-x-12">
+            <div class="flex items-center lg:justify-start justify-around mb-8 mt-16 sm:my-20 lg:space-x-12">
                 <img src="../assets/opal.png" alt="" class="h-24" />
                 <div class="text-primary text-7xl my-8">Opal</div>
             </div>
+            <label for="my-drawer-2" class="btn btn-ghost drawer-button absolute left-6 top-6"> <Bars3Icon class="w-6 h-6 text-secondary" /></label>
 
             <div class="font-mono text-lg bg-neutral rounded-lg p-4 pb-2 mx-2 w-fit">
                 <div class="mx-2">A <span class="text-primary">markdown</span> based, <span class="text-secondary">note taking</span> web application.</div>
@@ -22,7 +23,7 @@
                 </button>
             </div>
 
-            <div v-if="notesDrawer" class="w-full flex flex-wrap mt-12 justify-start items-center">
+            <div v-if="notesDrawer" class="w-full flex flex-wrap mt-12 sm:mt-20 justify-start items-center">
                 <router-link :to="`${key}`" v-for="key in Object.keys(notesDrawer)" :key="key" class="border-primary border-2 flex items-center hover:border-secondary rounded-lg p-2 m-2">
                     <ClipboardIcon class="h-6 w-6 text-secondary mr-2" />
                     {{ notesDrawer[key].title }}
@@ -37,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ArrowLeftOnRectangleIcon, InformationCircleIcon, ClipboardIcon, ArrowRightOnRectangleIcon, PlusIcon } from "@heroicons/vue/24/outline";
+import { ArrowLeftOnRectangleIcon, InformationCircleIcon, ClipboardIcon, ArrowRightOnRectangleIcon, PlusIcon, Bars3Icon } from "@heroicons/vue/24/outline";
 import { user, store, notesDrawer } from "../store";
 import { useRouter } from "vue-router";
 const router = useRouter();
