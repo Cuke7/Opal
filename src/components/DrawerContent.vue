@@ -1,5 +1,5 @@
 <template>
-    <ul class="p-4 overflow-y-auto w-64 bg-neutral text-neutral-content text-lg font-mono border-r-2 border-primary">
+    <ul class="p-4 overflow-y-auto w-64 bg-neutral text-neutral-content text-lg font-mono">
         <!-- <div class="font-mono font-bold text-4xl flex justify-center my-4">Opal</div>
         <img src="../assets/opal.png" alt="Opal stone" class="mx-auto my-4" /> -->
 
