@@ -6,7 +6,7 @@
         </div>
         <div ref="render" class="h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1">
             <ToolBar @toggle="toggle" :view="view" class="sm:hidden" />
-            <div ref="prose" class="flex-1 bg-transparent overflow-y-auto prose max-w-none p-8 pt-4 sm:pr-16 lg:prose-lg rounded-t-2xl prose-pre:max-w-fit" v-html="html" />
+            <div ref="prose" class="flex-1 bg-transparent overflow-y-auto prose max-w-none p-8 pt-4 sm:pr-16 lg:prose-lg rounded-t-2xl lg:prose-pre:max-w-fit" v-html="html" />
         </div>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <ul class="p-4 overflow-y-auto w-64 bg-neutral text-neutral-content text-lg font-mono">
+    <ul class="p-4 overflow-y-auto w-64 bg-neutral text-neutral-content text-lg font-mono border-r-2 border-primary">
         <!-- <div class="font-mono font-bold text-4xl flex justify-center my-4">Opal</div>
         <img src="../assets/opal.png" alt="Opal stone" class="mx-auto my-4" /> -->
 
@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
 import { ClipboardIcon, PlusIcon, InformationCircleIcon, ArrowRightOnRectangleIcon, ArrowLeftOnRectangleIcon, HomeIcon } from "@heroicons/vue/24/outline";
-import { store, notesDrawer, user, drawer, viewOnly, lightMode } from "../store";
+import { store, notesDrawer, user, drawer, viewOnly } from "../store";
 import { useRouter } from "vue-router";
 import DarkModeSwitch from "./DarkModeSwitch.vue";
 const router = useRouter();

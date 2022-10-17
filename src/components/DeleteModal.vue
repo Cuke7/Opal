@@ -4,7 +4,7 @@
     <!-- Put this part before </body> tag -->
     <input type="checkbox" id="my-modal-6" class="modal-toggle" />
     <label for="my-modal-6" class="modal modal-bottom sm:modal-middle cursor-pointer">
-        <div class="modal-box bg-base-300 relative">
+        <div class="modal-box bg-neutral relative sm:border-2 border-t-2 border-primary">
             <h3 class="font-bold text-lg">Just to make sure...</h3>
             <p class="py-4">Are you sure you want to delete this note?</p>
             <div class="flex justify-end space-x-10">

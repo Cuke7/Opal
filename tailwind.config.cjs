@@ -94,7 +94,7 @@ module.exports = {
             img: {
               "margin": "15px 0px 15px 0px!important",
               "max-width": "100%",
-              '@media (min-width: 2000px)': {
+              '@media (min-width: 1500px)': {
                 "max-width": "600px"
               }
             }
