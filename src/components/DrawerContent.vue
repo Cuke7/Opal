@@ -30,10 +30,6 @@
             <InformationCircleIcon class="h-6 w-6 text-primary mr-4" />
             Tutorial
         </router-link>
-        <button class="flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2" v-if="user" @click="store.logout">
-            <ArrowRightOnRectangleIcon class="h-6 w-6 text-primary mr-4" />
-            Log out
-        </button>
 
         <DarkModeSwitch />
 
