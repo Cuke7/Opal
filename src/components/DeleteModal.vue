@@ -19,6 +19,7 @@
 import { store, deleteNote } from "../store";
 import { useRouter } from "vue-router";
 const router = useRouter();
+
 const deleteTheNote = () => {
     deleteNote()
         .then(() => {
