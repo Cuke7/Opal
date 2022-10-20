@@ -39,13 +39,20 @@
 
 <script setup lang="ts">
 import { ArrowLeftOnRectangleIcon, InformationCircleIcon, ClipboardIcon, ArrowRightOnRectangleIcon, PlusIcon, Bars3Icon } from "@heroicons/vue/24/outline";
-import { user, store, notesDrawer, createNote } from "../store";
+import { user, store, notesDrawer, db } from "../store";
 import { useRouter } from "vue-router";
+import { setDoc, collection, doc } from "firebase/firestore";
+
 const router = useRouter();
 
-const createNewNote = () => {
-    createNote().then((key) => {
-        router.push(String(key));
-    });
+const createNewNote = async () => {
+    try {
+        let newDoc = doc(collection(db, user.value.uid));
+        setDoc(newDoc, { title: "My new note", text: "# Hi mom" }).then(() => {});
+        router.push(newDoc.id);
+        store.toast("Note created", 2000);
+    } catch {
+        store.toast("Can't create new note", 2000);
+    }
 };
 </script>

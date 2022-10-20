@@ -60,26 +60,10 @@ export const store = reactive({
     },
 })
 
-
-export const createNote = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const docRef = await addDoc(collection(db, user.value.uid), { title: "My new note", text: "# Hi mom" });
-            console.log("Document written with ID: ", docRef.id);
-            store.toast("New note created", 2000);
-            resolve(docRef.id)
-        } catch (e) {
-            // console.error("Error adding document: ", e);
-            store.toast("Failed to create a new note", 2000);
-            reject(null)
-        }
-    })
-}
-
 export const saveNote = async () => {
     if (note.value.key) {
         try {
-            await setDoc(doc(db, user.value.uid, note.value.key), {
+            setDoc(doc(db, user.value.uid, note.value.key), {
                 title: note.value.title,
                 text: note.value.text
             });
@@ -92,18 +76,15 @@ export const saveNote = async () => {
 }
 
 export const loadNote = async (key: string) => {
+    console.log(key)
     const docRef = doc(db, user.value.uid, key);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        // console.log("Document data:", docSnap.data());
         note.value = <any>docSnap.data()
         note.value.key = key
         drawer.value = false;
     } else {
         store.toast("Failed to load note", 2000);
     }
-}
-
-export const deleteNote = async () => {
-    await deleteDoc(doc(db, user.value.uid, String(note.value.key)));
 }

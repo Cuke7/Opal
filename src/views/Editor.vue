@@ -6,7 +6,7 @@
 import Note from "../components/Note.vue";
 import { loadNote, user, note } from "../store";
 import { useRoute, useRouter } from "vue-router";
-import { watch } from "vue";
+import { watch, onMounted } from "vue";
 const route = useRoute();
 const router = useRouter();
 
@@ -111,17 +111,19 @@ note.value = {
     key: "",
 };
 
-if (route.params.key == "tutorial") {
-    note.value.text = tuto;
-    note.value.title = "Tutorial";
-    note.value.key = null;
-} else {
-    if (!user.value) {
-        router.push("/");
+onMounted(() => {
+    if (route.params.key == "tutorial") {
+        note.value.text = tuto;
+        note.value.title = "Tutorial";
+        note.value.key = null;
     } else {
-        loadNote(String(route.params.key));
+        if (!user.value) {
+            router.push("/");
+        } else {
+            loadNote(String(route.params.key));
+        }
     }
-}
+});
 
 watch(
     () => route.params.key,

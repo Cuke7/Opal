@@ -16,18 +16,15 @@
 </template>
 
 <script setup lang="ts">
-import { store, deleteNote } from "../store";
+import { store, db, user, note } from "../store";
 import { useRouter } from "vue-router";
+import { doc, deleteDoc } from "firebase/firestore";
+
 const router = useRouter();
 
 const deleteTheNote = () => {
-    deleteNote()
-        .then(() => {
-            router.push("/");
-            store.toast("Note deleted", 5000);
-        })
-        .catch(() => {
-            store.toast("Error, can't delete note", 5000);
-        });
+    deleteDoc(doc(db, user.value.uid, String(note.value.key)));
+    store.toast("Note deleted", 2000);
+    router.push("/");
 };
 </script>
