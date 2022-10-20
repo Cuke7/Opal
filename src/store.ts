@@ -1,7 +1,7 @@
 import { reactive, ref } from 'vue'
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getFirestore, addDoc, collection, doc, onSnapshot, setDoc, query, getDoc, deleteDoc } from "firebase/firestore";
+import { getFirestore, addDoc, collection, doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAlipydLd_XjBNk9ikNG3tfc_q4NW0j8FQ",
@@ -13,7 +13,7 @@ const firebaseConfig = {
     databaseURL: "https://opal-a0759-default-rtdb.europe-west1.firebasedatabase.app/",
 };
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 auth.languageCode = "fr";
 const provider = new GoogleAuthProvider();
 export const db = getFirestore(app);
@@ -29,26 +29,6 @@ export const notesDrawer = ref<any>({});
 export const user = ref<any>(null)
 export const viewOnly = ref(false)
 export const lightMode = ref(false)
-
-
-onAuthStateChanged(auth, async (user2) => {
-    if (user2) {
-        user.value = user2
-        console.log("onAuthStateChanged", "Signed in")
-        const q = query(collection(db, user.value.uid));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            notesDrawer.value = []
-            querySnapshot.forEach((doc) => {
-                notesDrawer.value.push({ ...doc.data(), key: doc.id });
-            })
-        });
-        store.toast("Logged in!", 2000);
-    } else {
-        user.value = null
-        console.log("Logged out!", user2);
-        store.toast("Logged out!", 2000);
-    }
-});
 
 export const store = reactive({
     login: () => {

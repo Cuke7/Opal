@@ -27,12 +27,34 @@
 
 <script setup lang="ts">
 import Toast from "./components/Toast.vue";
-import { store, drawer, db } from "./store";
+import { store, drawer, db, user, auth, notesDrawer } from "./store";
 import DrawerContent from "./components/DrawerContent.vue";
 import DeleteModal from "./components/DeleteModal.vue";
-import { enableIndexedDbPersistence } from "firebase/firestore";
+import { enableIndexedDbPersistence, query, collection, onSnapshot } from "firebase/firestore";
+import { onMounted } from "vue";
+import { onAuthStateChanged } from "firebase/auth";
 
-enableIndexedDbPersistence(db).catch((err: any) => {
-    console.error(err);
+onMounted(async () => {
+    await enableIndexedDbPersistence(db).catch((err: any) => {
+        console.error(err);
+    });
+    onAuthStateChanged(auth, async (user2) => {
+        if (user2) {
+            user.value = user2;
+            console.log("onAuthStateChanged", "Signed in");
+            const q = query(collection(db, user.value.uid));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                notesDrawer.value = [];
+                querySnapshot.forEach((doc) => {
+                    notesDrawer.value.push({ ...doc.data(), key: doc.id });
+                });
+            });
+            store.toast("Logged in!", 2000);
+        } else {
+            user.value = null;
+            console.log("Logged out!", user2);
+            store.toast("Logged out!", 2000);
+        }
+    });
 });
 </script>
