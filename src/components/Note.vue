@@ -2,7 +2,7 @@
     <div class="flex h-full bg-base-100 text-base-content p-4 sm:px-8">
         <div ref="editor" class="h-full sm:w-1/2 sm:flex flex-col w-full flex hidden" v-if="!viewOnly">
             <ToolBar @toggle="toggle" :view="view" class="w-full lg:w-1/2" />
-            <textarea @blur="store.saveNote" v-model="note.text" class="flex-1 bg-transparent w-full overflow-y-auto p-8 pt-4 lg:text-lg"> </textarea>
+            <textarea @blur="saveNote" v-model="note.text" class="flex-1 bg-transparent w-full overflow-y-auto p-8 pt-4 lg:text-lg"> </textarea>
         </div>
         <div ref="render" class="h-full sm:w-1/2 sm:flex flex-col w-full flex flex-1">
             <ToolBar @toggle="toggle" :view="view" class="sm:hidden" />
@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import ToolBar from "../components/ToolBar.vue";
-import { store, note, viewOnly } from "../store";
+import { saveNote, note, viewOnly } from "../store";
 import { marked } from "marked";
 
 const html = computed(() => {

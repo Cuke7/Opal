@@ -11,7 +11,7 @@
     "dependencies": {
         "@heroicons/vue": "^2.0.11",
         "daisyui": "^2.31.0",
-        "firebase": "^9.10.0",
+        "firebase": "^9.12.1",
         "marked": "^4.1.1",
         "theme-change": "^2.2.0",
         "vue": "^3.2.37",

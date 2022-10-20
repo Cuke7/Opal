@@ -7,28 +7,28 @@
             </div>
             <label for="my-drawer-2" class="btn btn-ghost drawer-button absolute left-6 top-6"> <Bars3Icon class="w-6 h-6 text-secondary" /></label>
 
-            <div class="font-mono text-lg bg-neutral rounded-lg p-4 pb-2 mx-2 w-fit">
+            <div class="font-mono text-lg bg-neutral rounded-lg p-4 mx-2 w-fit">
                 <div class="mx-2">A <span class="text-primary">markdown</span> based, <span class="text-secondary">note taking</span> web application.</div>
                 <router-link to="/tutorial" class="flex items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg my-2 p-2">
                     <InformationCircleIcon class="h-6 w-6 text-primary mr-4" />
                     Tutorial
                 </router-link>
-                <button class="flex items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg p-2" v-if="!user" @click="store.login">
+                <button class="flex items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg p-2 w-full" v-if="!user" @click="store.login">
                     <ArrowLeftOnRectangleIcon class="h-6 w-6 text-primary mr-4" />
                     Log in
                 </button>
-                <button class="flex items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg p-2" v-if="user" @click="store.logout">
+                <button class="flex items-center hover:bg-blue-800 hover:bg-opacity-50 rounded-lg p-2 w-full" v-if="user" @click="store.logout">
                     <ArrowRightOnRectangleIcon class="h-6 w-6 text-primary mr-4" />
                     Log out
                 </button>
             </div>
 
             <div v-if="notesDrawer" class="w-full flex flex-wrap mt-12 sm:mt-20 justify-start items-center">
-                <router-link :to="`${key}`" v-for="key in Object.keys(notesDrawer)" :key="key" class="border-primary border-2 flex items-center hover:border-secondary rounded-lg p-2 m-2">
+                <router-link :to="`${note.key}`" v-for="note in notesDrawer" class="border-primary border-2 flex items-center hover:border-secondary rounded-lg p-2 m-2">
                     <ClipboardIcon class="h-6 w-6 text-secondary mr-2" />
-                    {{ notesDrawer[key].title }}
+                    {{ note.title }}
                 </router-link>
-                <button v-if="user" class="flex items-center border-primary border-2 hover:border-secondary rounded-lg p-2 m-2" @click="createNote">
+                <button v-if="user" class="flex items-center border-primary border-2 hover:border-secondary rounded-lg p-2 m-2" @click="createNewNote">
                     <PlusIcon class="h-6 w-6 text-secondary mr-4" />
                     Add a new note
                 </button>
@@ -39,13 +39,13 @@
 
 <script setup lang="ts">
 import { ArrowLeftOnRectangleIcon, InformationCircleIcon, ClipboardIcon, ArrowRightOnRectangleIcon, PlusIcon, Bars3Icon } from "@heroicons/vue/24/outline";
-import { user, store, notesDrawer } from "../store";
+import { user, store, notesDrawer, createNote } from "../store";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-const createNote = () => {
-    store.createNewNote().then(() => {
-        router.push(store.tempKey);
+const createNewNote = () => {
+    createNote().then((key) => {
+        router.push(String(key));
     });
 };
 </script>

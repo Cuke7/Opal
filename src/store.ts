@@ -1,8 +1,7 @@
 import { reactive, ref } from 'vue'
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref as refdb, push, child, update, onValue, get } from "firebase/database";
-
+import { getFirestore, addDoc, collection, doc, onSnapshot, setDoc, query, getDoc, deleteDoc } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAlipydLd_XjBNk9ikNG3tfc_q4NW0j8FQ",
@@ -17,7 +16,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 auth.languageCode = "fr";
 const provider = new GoogleAuthProvider();
-export const db = getDatabase(app);
+export const db = getFirestore(app);
 
 export const note = ref({
     text: "",
@@ -32,20 +31,20 @@ export const viewOnly = ref(false)
 export const lightMode = ref(false)
 
 
-
-onAuthStateChanged(auth, (user2: any) => {
+onAuthStateChanged(auth, async (user2) => {
     if (user2) {
-        console.log("onAuthStateChanged", user2);
-        user.value = user2;
-        store.toast("Logged in!", 2000);
-        //Set firebase listener
-        const notesListRef = refdb(db, `notesList/${user.value.uid}/`);
-        onValue(notesListRef, (snapshot) => {
-            const data = snapshot.val();
-            notesDrawer.value = data;
+        user.value = user2
+        console.log("onAuthStateChanged", "Signed in")
+        const q = query(collection(db, user.value.uid));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            notesDrawer.value = []
+            querySnapshot.forEach((doc) => {
+                notesDrawer.value.push({ ...doc.data(), key: doc.id });
+            })
         });
+        store.toast("Logged in!", 2000);
     } else {
-        user.value = null;
+        user.value = null
         console.log("Logged out!", user2);
         store.toast("Logged out!", 2000);
     }
@@ -68,52 +67,10 @@ export const store = reactive({
             .catch((error: any) => console.error(error));
     },
     toastSettings: {
-        show: true,
+        show: false,
         text: "Logged in",
     },
-    createNewNote: () => {
-        const newNoteKey = <string>push(child(refdb(db), "/")).key;
-        const newNote = {
-            text: "# Hi mom",
-            title: "My new note",
-            key: newNoteKey
-        }
-        store.tempKey = newNoteKey
-        const updates: any = {};
-        updates[`/notesContent/${user.value.uid}/${newNoteKey}`] = { text: newNote.text, title: newNote.title };
-        updates[`/notesList/${user.value.uid}/${newNoteKey}`] = { title: newNote.title };
-        return update(refdb(db), updates);
-    },
-    loadNote: (uid: string, key: string) => {
-        const dbRef = refdb(db);
-        get(child(dbRef, `notesContent/${uid}/${key}`))
-            .then((snapshot) => {
-                if (snapshot.exists()) {
-                    const retrievedNote = snapshot.val();
-                    note.value = retrievedNote;
-                    note.value.key = key;
-                    drawer.value = false;
-                } else {
-                    console.log("No data available");
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    },
-    saveNote: () => {
-        if (!note.value.key) return
-        const updates: any = {};
-        updates[`/notesContent/${user.value.uid}/${note.value.key}`] = { text: note.value.text, title: note.value.title };
-        updates[`/notesList/${user.value.uid}/${note.value.key}`] = { title: note.value.title };
-        update(refdb(db), updates)
-            .then(() => {
-                store.toast("Note saved", 1000);
-            })
-            .catch(() => {
-                store.toast("Error, can't save note", 5000);
-            });
-    },
+
     toast: (text: string, duration: number) => {
         store.toastSettings.text = text;
         store.toastSettings.show = true;
@@ -121,11 +78,52 @@ export const store = reactive({
             store.toastSettings.show = false;
         }, duration);
     },
-    deleteNote: () => {
-        const updates: any = {};
-        updates[`/notesContent/${user.value.uid}/${note.value.key}`] = null;
-        updates[`/notesList/${user.value.uid}/${note.value.key}`] = null;
-        return update(refdb(db), updates)
-    },
-    tempKey: "",
 })
+
+
+export const createNote = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const docRef = await addDoc(collection(db, user.value.uid), { title: "My new note", text: "# Hi mom" });
+            console.log("Document written with ID: ", docRef.id);
+            store.toast("New note created", 2000);
+            resolve(docRef.id)
+        } catch (e) {
+            // console.error("Error adding document: ", e);
+            store.toast("Failed to create a new note", 2000);
+            reject(null)
+        }
+    })
+}
+
+export const saveNote = async () => {
+    if (note.value.key) {
+        try {
+            await setDoc(doc(db, user.value.uid, note.value.key), {
+                title: note.value.title,
+                text: note.value.text
+            });
+            store.toast("Note saved", 2000);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+            store.toast("Failed to save note", 2000);
+        }
+    }
+}
+
+export const loadNote = async (key: string) => {
+    const docRef = doc(db, user.value.uid, key);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        note.value = <any>docSnap.data()
+        note.value.key = key
+        drawer.value = false;
+    } else {
+        store.toast("Failed to load note", 2000);
+    }
+}
+
+export const deleteNote = async () => {
+    await deleteDoc(doc(db, user.value.uid, String(note.value.key)));
+}

@@ -27,7 +27,12 @@
 
 <script setup lang="ts">
 import Toast from "./components/Toast.vue";
-import { store, drawer } from "./store";
+import { store, drawer, db } from "./store";
 import DrawerContent from "./components/DrawerContent.vue";
 import DeleteModal from "./components/DeleteModal.vue";
+import { enableIndexedDbPersistence } from "firebase/firestore";
+
+enableIndexedDbPersistence(db).catch((err: any) => {
+    console.error(err);
+});
 </script>

@@ -46,16 +46,16 @@
         </div> -->
 
         <hr class="m-3 mt-2 border-accent border-t-2" v-if="user" />
-        <div v-if="user" class="text-xl ml-3 font-bold">My notes</div>
+        <div v-if="user" class="text-xl ml-3 font-bold my-3">My notes</div>
 
         <div v-if="notesDrawer">
-            <router-link :to="`${key}`" v-for="key in Object.keys(notesDrawer)" :key="key" class="flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2">
+            <router-link :to="`${note.key}`" v-for="note in notesDrawer" class="flex w-full items-center hover:bg-info hover:bg-opacity-50 rounded-lg my-2 p-2">
                 <ClipboardIcon class="h-6 w-6 text-secondary mr-4" />
-                {{ notesDrawer[key].title }}
+                {{ note.title }}
             </router-link>
         </div>
 
-        <button v-if="user" @click="createNote" class="btn btn-ghost w-full hover:bg-info hover:bg-opacity-50 rounded-lg border-primary border-2">
+        <button v-if="user" @click="createNewNote" class="btn btn-ghost w-full hover:bg-info hover:bg-opacity-50 rounded-lg border-primary border-2">
             <PlusIcon class="h-6 w-6 text-primary" />
         </button>
     </ul>
@@ -63,14 +63,14 @@
 
 <script setup lang="ts">
 import { ClipboardIcon, PlusIcon, InformationCircleIcon, ArrowRightOnRectangleIcon, ArrowLeftOnRectangleIcon, HomeIcon } from "@heroicons/vue/24/outline";
-import { store, notesDrawer, user, drawer, viewOnly } from "../store";
+import { store, notesDrawer, user, drawer, viewOnly, createNote } from "../store";
 import { useRouter } from "vue-router";
 import DarkModeSwitch from "./DarkModeSwitch.vue";
 const router = useRouter();
 
-const createNote = () => {
-    store.createNewNote().then(() => {
-        router.push(store.tempKey);
+const createNewNote = () => {
+    createNote().then((key) => {
+        router.push(String(key));
     });
 };
 </script>
