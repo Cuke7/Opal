@@ -16,7 +16,7 @@ export default defineConfig({
       short_name: 'Opal',
       background_color: "#000000",
       theme_color: "#000000",
-      display: "fullscreen",
+      display: "standalone",
       icons: [
         {
           src: 'opal.png',
