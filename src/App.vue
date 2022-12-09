@@ -39,7 +39,7 @@ onMounted(async () => {
     let touchendX = 0;
 
     function checkDirection() {
-        if (touchendX > touchstartX) alert("swiped right!");
+        if (touchendX > touchstartX + 100) alert("swiped right!");
     }
 
     document.addEventListener("touchstart", (e) => {
