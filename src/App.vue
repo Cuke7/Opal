@@ -35,22 +35,22 @@ import { onMounted } from "vue";
 import { onAuthStateChanged } from "firebase/auth";
 
 onMounted(async () => {
-    let touchstartX = 0;
-    let touchendX = 0;
+    // let touchstartX = 0;
+    // let touchendX = 0;
 
-    function checkDirection() {
-        if (touchendX > touchstartX + 100) alert("swiped right!");
-    }
+    // function checkDirection() {
+    //     if (touchendX > touchstartX + 100) alert("swiped right!");
+    // }
 
-    document.addEventListener("touchstart", (e) => {
-        touchstartX = e.changedTouches[0].screenX;
-        e.stopPropagation();
-    });
+    // document.addEventListener("touchstart", (e) => {
+    //     touchstartX = e.changedTouches[0].screenX;
+    //     e.stopPropagation();
+    // });
 
-    document.addEventListener("touchend", (e) => {
-        touchendX = e.changedTouches[0].screenX;
-        checkDirection();
-    });
+    // document.addEventListener("touchend", (e) => {
+    //     touchendX = e.changedTouches[0].screenX;
+    //     checkDirection();
+    // });
 
     await enableIndexedDbPersistence(db).catch((err: any) => {
         console.error(err);
