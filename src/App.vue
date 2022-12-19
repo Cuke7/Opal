@@ -43,12 +43,12 @@ onMounted(async () => {
     }
 
     document.addEventListener("touchstart", (e) => {
-        touchstartX = e.changedTouches[0].screenX;
+        touchstartX = e.changedTouches[0].clientX;
         e.stopPropagation();
     });
 
     document.addEventListener("touchend", (e) => {
-        touchendX = e.changedTouches[0].screenX;
+        touchendX = e.changedTouches[0].clientX;
         checkDirection();
     });
 
