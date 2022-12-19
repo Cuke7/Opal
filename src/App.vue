@@ -1,6 +1,6 @@
 <template>
     <div class="drawer drawer-mobile">
-        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" v-model="drawer" />
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" v-model="drawer" ref="drawer"/>
         <div class="drawer-content">
             <div class="h-screen">
                 <router-view></router-view>
@@ -37,9 +37,10 @@ import { onAuthStateChanged } from "firebase/auth";
 onMounted(async () => {
     let touchstartX = 0;
     let touchendX = 0;
+    const drawer = ref<HTMLInputElement | null>(null);
 
     function checkDirection() {
-        if (touchendX > touchstartX + 50 && touchstartX < 40) alert("swiped right!");
+        if (touchendX > touchstartX + 50 && touchstartX < 40) drawer.value.checked = true;
     }
 
     document.addEventListener("touchstart", (e) => {
