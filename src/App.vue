@@ -31,7 +31,7 @@ import { store, drawer, db, user, auth, notesDrawer } from "./store";
 import DrawerContent from "./components/DrawerContent.vue";
 import DeleteModal from "./components/DeleteModal.vue";
 import { enableIndexedDbPersistence, query, collection, onSnapshot } from "firebase/firestore";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { onAuthStateChanged } from "firebase/auth";
 
 const drawer =ref(false);
