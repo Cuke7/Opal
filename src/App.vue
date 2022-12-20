@@ -1,6 +1,6 @@
 <template>
     <div class="drawer drawer-mobile">
-        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" v-model="drawer" ref="drawer"/>
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" v-model="drawer"/>
         <div class="drawer-content">
             <div class="h-screen">
                 <router-view></router-view>
@@ -34,24 +34,25 @@ import { enableIndexedDbPersistence, query, collection, onSnapshot } from "fireb
 import { onMounted } from "vue";
 import { onAuthStateChanged } from "firebase/auth";
 
+const drawer =ref(false);
+
 onMounted(async () => {
-    // let touchstartX = 0;
-    // let touchendX = 0;
-    // const drawer = ref<HTMLInputElement | null>(null);
+    let touchstartX = 0;
+    let touchendX = 0;
 
-    // function checkDirection() {
-    //     if (touchendX > touchstartX + 50 && touchstartX < 40) drawer.value.checked = true;
-    // }
+    function checkDirection() {
+        if (touchendX > touchstartX + 50 && touchstartX < 40) drawer.value = true;
+    }
 
-    // document.addEventListener("touchstart", (e) => {
-    //     touchstartX = e.changedTouches[0].clientX;
-    //     e.stopPropagation();
-    // });
+    document.addEventListener("touchstart", (e) => {
+        touchstartX = e.changedTouches[0].clientX;
+        e.stopPropagation();
+    });
 
-    // document.addEventListener("touchend", (e) => {
-    //     touchendX = e.changedTouches[0].clientX;
-    //     checkDirection();
-    // });
+    document.addEventListener("touchend", (e) => {
+        touchendX = e.changedTouches[0].clientX;
+        checkDirection();
+    });
 
     await enableIndexedDbPersistence(db).catch((err: any) => {
         console.error(err);
