@@ -16,9 +16,6 @@ const router = createRouter({
         {
             path: "/:key", name: "Editor", component: Editor
         },
-        {
-            path: "/:uid/:key", name: "SharedNote", component: SharedNote
-        },
     ]
 })
 
